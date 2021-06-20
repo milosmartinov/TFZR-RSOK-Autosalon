@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using TFZRAutosalon.Data;
 
 namespace TFZRAutosalon
@@ -34,6 +35,12 @@ namespace TFZRAutosalon
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc().AddRazorPagesOptions(options => {
+                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/account/login");
+                options.Conventions.AddAreaPageRoute("Identity", "/Account/Register", "/account/register");
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddRouting(x => x.LowercaseUrls = true);
+            services.AddRouting(x => x.AppendTrailingSlash = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +53,7 @@ namespace TFZRAutosalon
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/home/error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
