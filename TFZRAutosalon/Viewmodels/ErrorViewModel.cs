@@ -1,6 +1,4 @@
-using System;
-
-namespace TFZRAutosalon.Models
+namespace TFZRAutosalon.Viewmodels
 {
     public class ErrorViewModel
     {
