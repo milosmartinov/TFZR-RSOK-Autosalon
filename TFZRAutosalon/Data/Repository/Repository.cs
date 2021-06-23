@@ -5,10 +5,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TFZRAutosalon.Data.Repository.IRepository;
+using TFZRAutosalon.Models;
 
 namespace TFZRAutosalon.Data.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : BaseModel
     {
         protected readonly DbContext _context;
         internal DbSet<T> DbSet;
@@ -73,17 +74,31 @@ namespace TFZRAutosalon.Data.Repository
         public void Add(T entity)
         {
             DbSet.Add(entity);
+            _context.SaveChangesAsync();
         }
 
         public void Remove(int id)
         {
             var entity = DbSet.Find(id);
             Remove(entity);
+            _context.SaveChangesAsync();
         }
 
         public void Remove(T entity)
         {
             DbSet.Remove(entity);
+            _context.SaveChangesAsync();
+        }
+
+        public void Update(T entity)
+        {
+            var model = DbSet.Find(entity.Id);
+            if (model == null)
+            {
+                return;
+            }
+            
+            _context.Entry(model).CurrentValues.SetValues(entity);
         }
     }
 }
