@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Repository\IRepository\" />
     <Folder Include="Infra\Exstensions\" />
     <Folder Include="Infra\Helpers\" />
     <Folder Include="Models\" />
