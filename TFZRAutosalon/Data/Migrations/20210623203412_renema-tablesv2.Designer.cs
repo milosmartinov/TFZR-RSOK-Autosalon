@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TFZRAutosalon.Data;
 
 namespace TFZRAutosalon.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210623203412_renema-tablesv2")]
+    partial class renematablesv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,128 +221,6 @@ namespace TFZRAutosalon.Data.Migrations
                     b.ToTable("UserToken");
                 });
 
-            modelBuilder.Entity("TFZRAutosalon.Models.CarModels", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("FK_Categorizes_CarModels")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FK_Manufacturer_CarModels")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FK_Categorizes_CarModels");
-
-                    b.HasIndex("FK_Manufacturer_CarModels");
-
-                    b.ToTable("CarModels");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Cars", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategorizId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FK_CarManufacturers_Cars")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FK_CarModels_Cars")
-                        .HasColumnType("int");
-
-                    b.Property<long>("HorsePower")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("NumberOfDoors")
-                        .HasColumnType("int");
-
-                    b.Property<long>("Torque")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategorizId");
-
-                    b.HasIndex("FK_CarManufacturers_Cars");
-
-                    b.HasIndex("FK_CarModels_Cars");
-
-                    b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Categorizes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categorizes");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Manufacturers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Manufacturers");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Orders", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOfPurchase")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FK_Cars_Orders")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FK_Users_Orders")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FK_Cars_Orders");
-
-                    b.HasIndex("FK_Users_Orders");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -390,43 +270,6 @@ namespace TFZRAutosalon.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.CarModels", b =>
-                {
-                    b.HasOne("TFZRAutosalon.Models.Categorizes", "Category")
-                        .WithMany()
-                        .HasForeignKey("FK_Categorizes_CarModels");
-
-                    b.HasOne("TFZRAutosalon.Models.Manufacturers", "Manufacturer")
-                        .WithMany()
-                        .HasForeignKey("FK_Manufacturer_CarModels");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Cars", b =>
-                {
-                    b.HasOne("TFZRAutosalon.Models.Categorizes", "Categoriz")
-                        .WithMany()
-                        .HasForeignKey("CategorizId");
-
-                    b.HasOne("TFZRAutosalon.Models.Manufacturers", "Manufacturer")
-                        .WithMany()
-                        .HasForeignKey("FK_CarManufacturers_Cars");
-
-                    b.HasOne("TFZRAutosalon.Models.CarModels", "CarModel")
-                        .WithMany()
-                        .HasForeignKey("FK_CarModels_Cars");
-                });
-
-            modelBuilder.Entity("TFZRAutosalon.Models.Orders", b =>
-                {
-                    b.HasOne("TFZRAutosalon.Models.Cars", "Car")
-                        .WithMany()
-                        .HasForeignKey("FK_Cars_Orders");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("FK_Users_Orders");
                 });
 #pragma warning restore 612, 618
         }
