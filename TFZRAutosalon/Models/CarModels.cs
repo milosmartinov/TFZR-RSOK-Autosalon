@@ -10,5 +10,10 @@ namespace TFZRAutosalon.Models
 
         [ForeignKey("FK_Manufacturer_CarModels")]
         public Manufacturers Manufacturer { get; set; }
+
+        public override bool IsModelValid()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -19,5 +19,9 @@ namespace TFZRAutosalon.Models
         public long HorsePower { get; set; }
         public long Torque { get; set; }
         public int NumberOfDoors { get; set; }
+        public override bool IsModelValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

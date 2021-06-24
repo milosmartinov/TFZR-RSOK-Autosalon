@@ -13,6 +13,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TFZRAutosalon.Data;
+using TFZRAutosalon.Data.Repository;
+using TFZRAutosalon.Data.Repository.IRepository;
+using TFZRAutosalon.Services;
+using TFZRAutosalon.Services.IServices;
 
 namespace TFZRAutosalon
 {
@@ -41,6 +45,8 @@ namespace TFZRAutosalon
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddRouting(x => x.LowercaseUrls = true);
             services.AddRouting(x => x.AppendTrailingSlash = true);
+            services.AddScoped<ICarsRepository, CarsRepository>();
+            services.AddScoped<ICarsService, CarsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

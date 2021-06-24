@@ -16,5 +16,9 @@ namespace TFZRAutosalon.Models
 
         public int Status { get; set; }
         public DateTime DateOfPurchase { get; set; }
+        public override bool IsModelValid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
