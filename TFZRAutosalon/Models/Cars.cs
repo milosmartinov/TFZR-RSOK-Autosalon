@@ -10,11 +10,21 @@ namespace TFZRAutosalon.Models
     public class Cars : BaseModel
     {
         [ForeignKey("FK_CarModels_Cars")]
-        public CarModels CarModel { get; set; }
+        public virtual CarModels CarModel { get; set; }
         [ForeignKey("FK_CarManufacturers_Cars")]
-        public Manufacturers Manufacturer { get; set; }
+        public virtual Manufacturers Manufacturer { get; set; }
 
-        public Categorizes Categoriz { get; set; }
+        [Column("FK_CarManufacturers_Cars")]
+        public int ManufacturersId { get; set; }
+        [Column("FK_CarModels_Cars")]
+        public int CarModelId { get; set; }
+
+
+        [ForeignKey("FK_Category_Cars")]
+        public virtual Categorizes Categoriz { get; set; }
+
+        [Column("FK_Category_Cars")]
+        public int CategoryId { get; set; }
         public string Description { get; set; }
         public long HorsePower { get; set; }
         public long Torque { get; set; }

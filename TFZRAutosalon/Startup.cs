@@ -47,6 +47,9 @@ namespace TFZRAutosalon
             services.AddRouting(x => x.AppendTrailingSlash = true);
             services.AddScoped<ICarsRepository, CarsRepository>();
             services.AddScoped<ICarsService, CarsService>();
+            services.AddScoped<ICategorizesRepository, CategorizesRepository>();
+            services.AddScoped<ICarModelsRepository, CarModelsRepository>();
+            services.AddScoped<IManufacturesRepository, ManufacturesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

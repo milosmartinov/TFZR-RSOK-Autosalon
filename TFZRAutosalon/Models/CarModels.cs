@@ -6,10 +6,10 @@ namespace TFZRAutosalon.Models
     {
         public string Name { get; set; }
         [ForeignKey("FK_Categorizes_CarModels")]
-        public Categorizes Category { get; set; }
+        public virtual Categorizes Category { get; set; }
 
         [ForeignKey("FK_Manufacturer_CarModels")]
-        public Manufacturers Manufacturer { get; set; }
+        public virtual Manufacturers Manufacturer { get; set; }
 
         public override bool IsModelValid()
         {
