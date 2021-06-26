@@ -40,7 +40,7 @@ namespace TFZRAutosalon.Data.Repository
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' },
                     StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProperty);
+                    query = query.Include(includeProperty.Trim());
                 }
             }
 
@@ -74,20 +74,20 @@ namespace TFZRAutosalon.Data.Repository
         public void Add(T entity)
         {
             DbSet.Add(entity);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Remove(int id)
         {
             var entity = DbSet.Find(id);
             Remove(entity);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Remove(T entity)
         {
             DbSet.Remove(entity);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Update(T entity)
@@ -99,6 +99,7 @@ namespace TFZRAutosalon.Data.Repository
             }
             
             _context.Entry(model).CurrentValues.SetValues(entity);
+            _context.SaveChanges();
         }
     }
 }

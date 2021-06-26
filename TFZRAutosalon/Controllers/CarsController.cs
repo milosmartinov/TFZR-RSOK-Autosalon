@@ -21,7 +21,7 @@ namespace TFZRAutosalon.Controllers
         public IActionResult Index()
         {
             var model = _service.GetAll();
-            return View(model);
+            return View(model.ToList());
         }
 
         public IActionResult Create()

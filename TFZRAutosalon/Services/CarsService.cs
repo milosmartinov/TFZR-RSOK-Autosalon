@@ -28,7 +28,7 @@ namespace TFZRAutosalon.Services
         }
         public IEnumerable<CarsViewModel> GetAll()
         {
-            return _repository.GetAll().Select(x => new CarsViewModel(x).CreateViewModel());
+            return _repository.GetAll(includeProperties: "CarModels, Categorizes , Manufacturers").Select(x => new CarsViewModel(x).CreateViewModel());
         }
 
         public SelectList GetCategoryForDropDown()
@@ -64,7 +64,7 @@ namespace TFZRAutosalon.Services
 
         public void Add(Cars model)
         {
-            throw new NotImplementedException();
+            _repository.Add(model);
         }
 
         IBaseViewModel<Cars> IService<Cars, IBaseViewModel<Cars>>.GetAll()

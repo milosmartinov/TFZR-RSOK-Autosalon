@@ -9,21 +9,15 @@ namespace TFZRAutosalon.Models
 {
     public class Cars : BaseModel
     {
-        [ForeignKey("FK_CarModels_Cars")]
-        public virtual CarModels CarModel { get; set; }
-        [ForeignKey("FK_CarManufacturers_Cars")]
-        public virtual Manufacturers Manufacturer { get; set; }
-
-        [Column("FK_CarManufacturers_Cars")]
+        [ForeignKey("ManufacturersId")]
+        public virtual Manufacturers Manufacturers { get; set; }
         public int ManufacturersId { get; set; }
-        [Column("FK_CarModels_Cars")]
+
+        [ForeignKey("CarModelId")]
+        public virtual CarModels CarModels { get; set; }
         public int CarModelId { get; set; }
-
-
-        [ForeignKey("FK_Category_Cars")]
-        public virtual Categorizes Categoriz { get; set; }
-
-        [Column("FK_Category_Cars")]
+        [ForeignKey("CategoryId")]
+        public virtual Categorizes Categorizes { get; set; }
         public int CategoryId { get; set; }
         public string Description { get; set; }
         public long HorsePower { get; set; }
@@ -31,7 +25,7 @@ namespace TFZRAutosalon.Models
         public int NumberOfDoors { get; set; }
         public override bool IsModelValid()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
